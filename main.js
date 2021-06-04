@@ -4,8 +4,8 @@ const player1 = {
     hp: 100,
     img: 'http://reactmarathon-api.herokuapp.com/assets/subzero.gif',
     weapon: ['Вилкой в глаз или в попу раз', 'Ледяной меч'],
-    attack: function() {
-        console.log(this.name + ' Fight...');
+    attack: function(damage) {
+        console.log(this.name + ' is fought by ' + damage);
     }
 }
 
@@ -15,8 +15,8 @@ const player2 = {
     hp: 100,
     img: 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif',
     weapon: ['Гарпун', 'Телепортация'],
-    attack: function() {
-        console.log(this.name + ' Fight...');
+    attack: function(damage) {
+        console.log(this.name + ' is fought by ' + damage);
     }
 }
 
@@ -77,10 +77,11 @@ function changeHP(player){
     const life = document.querySelector(`.player${player.player} .life`);
     life.style.width = player.hp + '%';
 
-    console.log(player.hp);
+    player.attack(attack);
 
     if(player.hp < 0) {
         random.disabled = true;
+        life.style.width = '0%';
         return true;
     }
 }
