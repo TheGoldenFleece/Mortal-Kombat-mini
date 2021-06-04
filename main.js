@@ -1,6 +1,7 @@
 const player1 = {
+    player: 1,
     name: 'SUB-ZERO',
-    hp: 50,
+    hp: 100,
     img: 'http://reactmarathon-api.herokuapp.com/assets/subzero.gif',
     weapon: ['Вилкой в глаз или в попу раз', 'Ледяной меч'],
     attack: function() {
@@ -9,8 +10,9 @@ const player1 = {
 }
 
 const player2 = {
+    player: 2,
     name: 'SCORPION',
-    hp: 80,
+    hp: 100,
     img: 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif',
     weapon: ['Гарпун', 'Телепортация'],
     attack: function() {
@@ -47,6 +49,41 @@ function createPlayer(playerName, player) {
 
     document.querySelector('.arenas').appendChild(divPlayerName);
 }
+
+const random = document.querySelector('.button');
+
+random.addEventListener('click', function(){
+
+    if(changeHP(player2)) {
+        alert(`${player1.name} WON!!!`);
+        return;
+    };
+
+    if(changeHP(player1)) {
+        alert(`${player2.name} WON!!!`);
+    };
+})
+
+function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
+function changeHP(player){
+    const attack = getRandomIntInclusive(1, 20);
+    player.hp -= attack; 
+    const life = document.querySelector(`.player${player.player} .life`);
+    life.style.width = player.hp + '%';
+
+    console.log(player.hp);
+
+    if(player.hp < 0) {
+        random.disabled = true;
+        return true;
+    }
+}
+
 
 createPlayer('player1', player1);
 createPlayer('player2', player2);
