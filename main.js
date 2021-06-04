@@ -5,7 +5,7 @@ const player1 = {
     img: 'http://reactmarathon-api.herokuapp.com/assets/subzero.gif',
     weapon: ['Вилкой в глаз или в попу раз', 'Ледяной меч'],
     attack: function() {
-        console.log(name + ' Fight...');
+        console.log(this.name + ' Fight...');
     }
 }
 
@@ -34,6 +34,7 @@ function createPlayer(playerName, player) {
 
     const life = document.createElement('div');
     life.classList.add('life');
+    life.style.width = '100%' 
 
     const name = document.createElement('div');
     name.classList.add('name');
